@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joseph ADICEAM | Portfolio Data & IA / No-Code</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            cyan: '#00f2fe',
+                            blue: '#4facfe',
+                            purple: '#7f00ff',
+                            dark: '#0a0f1d',
+                            cardDark: 'rgba(15, 23, 42, 0.75)',
+                            cardLight: 'rgba(255, 255, 255, 0.85)',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 2s infinite',
+                        'float': 'float 4s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '1', boxShadow: '0 0 15px rgba(0, 242, 254, 0.6)' },
+                            '50%': { opacity: '0.6', boxShadow: '0 0 5px rgba(0, 242, 254, 0.2)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        /* Custom scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0f1d;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00f2fe;
+        }
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #00f2fe 0%, #4facfe 50%, #00c6ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-brand-dark text-slate-800 dark:text-slate-200 antialiased selection:bg-brand-cyan selection:text-slate-900">
+
+    <!-- Header / Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-panel bg-white/70 dark:bg-brand-dark/80 border-b border-slate-200 dark:border-slate-800/80" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-cyan to-brand-blue flex items-center justify-center text-slate-950 font-bold text-xl shadow-lg shadow-brand-cyan/20 group-hover:scale-105 transition-transform">
+                    JA
+                </div>
+                <span class="font-bold text-lg tracking-tight text-slate-900 dark:text-white group-hover:text-brand-cyan transition-colors">
+                    Joseph <span class="gradient-text">ADICEAM</span>
+                </span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                <a href="#hero" class="nav-link px-3 py-2 rounded-lg text-sm font-medium transition-colors hover:text-brand-cyan text-slate-600 dark:text-slate-300" data-section="hero">Accueil</a>
+                <a href="#about" class="nav-link px-3 py-2 rounded-lg text-sm font-medium transition-colors hover:text-brand-cyan text-slate-600 dark:text-slate-300" data-section="about">Présentation</a>
+                <a href="#experience" class="nav-link px-3 py-2 rounded-lg text-sm font-medium transition-colors hover:text-brand-cyan text-slate-600 dark:text-slate-300" data-section="experience">Parcours</a>
+                <a href="#skills" class="nav-link px-3 py-2 rounded-lg text-sm font-medium transition-colors hover:text-brand-cyan text-slate-600 dark:text-slate-300" data-section="skills">Compétences</a>
+                <a href="#projects" class="nav-link px-3 py-2 rounded-lg text-sm font-medium transition-colors hover:text-brand-cyan text-slate-600 dark:text-slate-300" data-section="projects">Projets</a>
+                <a href="#contact" class="nav-link px-3 py-2 rounded-lg text-sm font-medium transition-colors hover:text-brand-cyan text-slate-600 dark:text-slate-300" data-section="contact">Contact</a>
+            </nav>
+
+            <!-- Actions Right (Dark mode + CTA + Hamburger) -->
+            <div class="flex items-center gap-3">
+                <!-- Dark Mode Toggle Button -->
+                <button id="theme-toggle" aria-label="Toggle theme" class="p-2.5 rounded-xl bg-slate-200/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-200 hover:text-brand-cyan dark:hover:text-brand-cyan transition-all duration-200 border border-slate-300/50 dark:border-slate-700/50">
+                    <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+                    <i data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
+                </button>
+
+                <!-- Mobile menu toggle -->
+                <button id="mobile-menu-button" aria-label="Open menu" class="md:hidden p-2.5 rounded-xl bg-slate-200/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-200 focus:outline-none">
+                    <i data-lucide="menu" id="menu-icon-open" class="w-6 h-6"></i>
+                    <i data-lucide="x" id="menu-icon-close" class="w-6 h-6 hidden"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Container -->
+        <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-brand-dark/95 backdrop-blur-xl px-4 pt-2 pb-6 space-y-2">
+            <a href="#hero" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-brand-cyan">Accueil</a>
+            <a href="#about" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-brand-cyan">Présentation</a>
+            <a href="#experience" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-brand-cyan">Parcours</a>
+            <a href="#skills" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-brand-cyan">Compétences</a>
+            <a href="#projects" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-brand-cyan">Projets</a>
+            <a href="#contact" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-brand-cyan">Contact</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-screen pt-28 pb-16 flex items-center justify-center overflow-hidden">
+        <!-- Background Glowing Elements -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-gradient-to-tr from-brand-cyan/20 to-brand-blue/10 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+        <div class="absolute bottom-10 right-10 w-72 h-72 bg-purple-600/10 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <!-- Pulsing Status Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-cyan/10 border border-brand-cyan/30 text-brand-cyan text-xs sm:text-sm font-semibold tracking-wide mb-8 animate-pulse-glow">
+                <span class="w-2.5 h-2.5 rounded-full bg-brand-cyan animate-ping"></span>
+                <span>À la recherche d'une Alternance Data & IA</span>
+            </div>
+
+            <!-- Main Heading -->
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-6">
+                Bonjour, je suis <br class="sm:hidden" />
+                <span class="gradient-text">Joseph ADICEAM</span>
+            </h1>
+
+            <!-- Dynamic Role Typing Text -->
+            <p class="text-xl sm:text-2xl lg:text-3xl font-medium text-slate-600 dark:text-slate-300 max-w-3xl mx-auto h-16 sm:h-12 mb-6">
+                <span id="typing-text" class="border-r-2 border-brand-cyan pr-1"></span>
+            </p>
+
+            <!-- Subtitle Pitch -->
+            <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+                Combiner la rigueur du développement web classique aux performances des technologies No-Code & Data pour propulser l'innovation digitale.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+                <a href="#projects" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-brand-cyan to-brand-blue text-slate-950 font-bold hover:shadow-lg hover:shadow-brand-cyan/25 hover:scale-105 transition-all duration-200 flex items-center justify-center gap-2">
+                    <span>Voir mes projets</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </a>
+                <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel bg-slate-200/50 dark:bg-slate-800/50 border border-slate-300 dark:border-slate-700/80 font-semibold text-slate-800 dark:text-white hover:border-brand-cyan hover:text-brand-cyan transition-all duration-200 flex items-center justify-center gap-2">
+                    <i data-lucide="mail" class="w-5 h-5"></i>
+                    <span>Me contacter</span>
+                </a>
+                <a href="#" onclick="alert('Téléchargement du CV en cours...'); return false;" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel bg-slate-100 dark:bg-slate-900/60 border border-slate-300 dark:border-slate-800 font-semibold text-slate-700 dark:text-slate-300 hover:border-slate-400 dark:hover:border-slate-600 transition-all duration-200 flex items-center justify-center gap-2">
+                    <i data-lucide="download" class="w-5 h-5"></i>
+                    <span>Télécharger CV</span>
+                </a>
+            </div>
+
+            <!-- Location Quick Badge -->
+            <div class="mt-12 inline-flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm">
+                <i data-lucide="map-pin" class="w-4 h-4 text-brand-cyan"></i>
+                <span>Pontoise, Île-de-France, France</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Présentation (About) Section -->
+    <section id="about" class="py-20 relative bg-slate-100/50 dark:bg-slate-900/40 border-y border-slate-200 dark:border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs sm:text-sm font-bold tracking-widest text-brand-cyan uppercase mb-2">À Propos</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Présentation & Vision</p>
+                <div class="w-16 h-1 bg-gradient-to-r from-brand-cyan to-brand-blue mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- Card Main Description -->
+                <div class="lg:col-span-7 glass-panel bg-white/80 dark:bg-slate-800/50 p-8 rounded-2xl border border-slate-200 dark:border-slate-700/60 shadow-xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="p-3 rounded-xl bg-brand-cyan/10 text-brand-cyan">
+                            <i data-lucide="user" class="w-8 h-8"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">Joseph ADICEAM</h3>
+                            <p class="text-sm text-brand-cyan font-medium">Étudiant Bachelor No Code / Low Code</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-base sm:text-lg mb-6">
+                        "Issu d'un BTS SIO option SLAM et actuellement en Bachelor No Code / Low Code, je conçois des applications web et des solutions digitales performantes en combinant logique de développement classique et outils modernes (Bubble, Webflow, Airtable)."
+                    </p>
+                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-base sm:text-lg">
+                        Je recherche une <strong class="text-slate-900 dark:text-white">alternance en Data / Intelligence Artificielle (IA)</strong> pour mettre à profit mes compétences en modélisation de bases de données, requête SQL et intégration applicative au service de projets digitaux innovants.
+                    </p>
+                </div>
+
+                <!-- Info Grid -->
+                <div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="glass-panel bg-white/80 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/60">
+                        <i data-lucide="map-pin" class="w-6 h-6 text-brand-cyan mb-3"></i>
+                        <h4 class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Localisation</h4>
+                        <p class="text-slate-900 dark:text-white font-bold">Pontoise (95)</p>
+                        <p class="text-xs text-slate-500 mt-1">Île-de-France</p>
+                    </div>
+
+                    <div class="glass-panel bg-white/80 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/60">
+                        <i data-lucide="briefcase" class="w-6 h-6 text-brand-cyan mb-3"></i>
+                        <h4 class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Recherche</h4>
+                        <p class="text-slate-900 dark:text-white font-bold">Alternance Data & IA</p>
+                        <p class="text-xs text-slate-500 mt-1">Rythme modulable</p>
+                    </div>
+
+                    <div class="glass-panel bg-white/80 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/60">
+                        <i data-lucide="graduation-cap" class="w-6 h-6 text-brand-cyan mb-3"></i>
+                        <h4 class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Niveau d'études</h4>
+                        <p class="text-slate-900 dark:text-white font-bold">Bac +3 (En cours)</p>
+                        <p class="text-xs text-slate-500 mt-1">BTS SIO SLAM Validé</p>
+                    </div>
+
+                    <div class="glass-panel bg-white/80 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/60">
+                        <i data-lucide="languages" class="w-6 h-6 text-brand-cyan mb-3"></i>
+                        <h4 class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Langues</h4>
+                        <p class="text-slate-900 dark:text-white font-bold">FR (Bilingue)</p>
+                        <p class="text-xs text-slate-500 mt-1">EN (Pro) / DE</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parcours (Education & Experience) -->
+    <section id="experience" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs sm:text-sm font-bold tracking-widest text-brand-cyan uppercase mb-2">Historique</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Formations & Expériences</p>
+                <div class="w-16 h-1 bg-gradient-to-r from-brand-cyan to-brand-blue mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Expériences Professionnelles -->
+                <div>
+                    <div class="flex items-center gap-3 mb-8">
+                        <div class="p-2.5 rounded-xl bg-brand-cyan/10 text-brand-cyan">
+                            <i data-lucide="briefcase" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Expériences Professionnelles</h3>
+                    </div>
+
+                    <div class="relative border-l-2 border-slate-200 dark:border-slate-800 pl-6 space-y-10 ml-4">
+                        <!-- Experience Card 1 -->
+                        <div class="relative group">
+                            <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-brand-cyan ring-4 ring-slate-50 dark:ring-brand-dark"></div>
+                            <div class="glass-panel bg-white/80 dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/50 hover:border-brand-cyan/50 transition-all duration-200">
+                                <span class="px-3 py-1 rounded-full bg-brand-cyan/10 text-brand-cyan text-xs font-semibold">2023 - 2025</span>
+                                <h4 class="text-xl font-bold text-slate-900 dark:text-white mt-3">Technicien Informatique (Alternance)</h4>
+                                <p class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-4">HD7 Informatique</p>
+                                <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                                    <li class="flex items-start gap-2">
+                                        <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-cyan shrink-0 mt-0.5"></i>
+                                        <span>Support utilisateurs et résolution de problèmes informatiques au quotidien.</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-cyan shrink-0 mt-0.5"></i>
+                                        <span>Gestion et maintenance du parc informatique.</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-cyan shrink-0 mt-0.5"></i>
+                                        <span>Travail en mode projet, application des logiques applicatives et gestion de données.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formations -->
+                <div>
+                    <div class="flex items-center gap-3 mb-8">
+                        <div class="p-2.5 rounded-xl bg-brand-blue/10 text-brand-blue">
+                            <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Formations Académiques</h3>
+                    </div>
+
+                    <div class="relative border-l-2 border-slate-200 dark:border-slate-800 pl-6 space-y-10 ml-4">
+                        <!-- Education Card 1 -->
+                        <div class="relative group">
+                            <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-brand-blue ring-4 ring-slate-50 dark:ring-brand-dark"></div>
+                            <div class="glass-panel bg-white/80 dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/50 hover:border-brand-blue/50 transition-all duration-200">
+                                <span class="px-3 py-1 rounded-full bg-brand-blue/10 text-brand-blue text-xs font-semibold">2023 - 2025</span>
+                                <h4 class="text-xl font-bold text-slate-900 dark:text-white mt-3">BTS SIO Option SLAM</h4>
+                                <p class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-2">Solutions Logicielles et Applications Métiers</p>
+                                <p class="text-xs font-semibold text-brand-cyan">CFA INSTA Paris</p>
+                            </div>
+                        </div>
+
+                        <!-- Education Card 2 -->
+                        <div class="relative group">
+                            <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-slate-400 dark:bg-slate-600 ring-4 ring-slate-50 dark:ring-brand-dark"></div>
+                            <div class="glass-panel bg-white/80 dark:bg-slate-800/40 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/50 hover:border-slate-400 transition-all duration-200">
+                                <span class="px-3 py-1 rounded-full bg-slate-200 dark:bg-slate-700/50 text-slate-700 dark:text-slate-300 text-xs font-semibold">2020 - 2021</span>
+                                <h4 class="text-xl font-bold text-slate-900 dark:text-white mt-3">Baccalauréat Général</h4>
+                                <p class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-2">Spécialités Mathématiques & Anglais</p>
+                                <p class="text-xs font-semibold text-slate-400">Lycée Français de Pondichéry</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compétences (Skills) Section -->
+    <section id="skills" class="py-20 relative bg-slate-100/50 dark:bg-slate-900/40 border-y border-slate-200 dark:border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs sm:text-sm font-bold tracking-widest text-brand-cyan uppercase mb-2">Savoir-faire</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Compétences Techniques & Transversales</p>
+                <div class="w-16 h-1 bg-gradient-to-r from-brand-cyan to-brand-blue mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Data & IA Card -->
+                <div class="glass-panel bg-white/80 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/60 hover:shadow-xl transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-brand-cyan/10 text-brand-cyan flex items-center justify-center mb-6">
+                        <i data-lucide="database" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Data & Intelligence Artificielle</h3>
+                    <ul class="space-y-3">
+                        <li class="p-3 rounded-lg bg-slate-100 dark:bg-slate-900/50 text-sm text-slate-700 dark:text-slate-300 font-medium">
+                            • Modélisation & Structuration de BDD
+                        </li>
+                        <li class="p-3 rounded-lg bg-slate-100 dark:bg-slate-900/50 text-sm text-slate-700 dark:text-slate-300 font-medium">
+                            • Requêtes SQL (Extraction, Modification, Jointures)
+                        </li>
+                        <li class="p-3 rounded-lg bg-slate-100 dark:bg-slate-900/50 text-sm text-slate-700 dark:text-slate-300 font-medium">
+                            • Sécurisation & Gestion des accès de données
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Dev & No-Code Card -->
+                <div class="glass-panel bg-white/80 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/60 hover:shadow-xl transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-brand-blue/10 text-brand-blue flex items-center justify-center mb-6">
+                        <i data-lucide="code" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Développement & No-Code</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-900/60 text-sm font-medium text-brand-cyan border border-brand-cyan/20">HTML5 / CSS3</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-900/60 text-sm font-medium text-brand-cyan border border-brand-cyan/20">PHP</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-900/60 text-sm font-medium text-brand-blue border border-brand-blue/20">Bubble</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-900/60 text-sm font-medium text-brand-blue border border-brand-blue/20">Webflow</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-900/60 text-sm font-medium text-brand-blue border border-brand-blue/20">Airtable</span>
+                    </div>
+                </div>
+
+                <!-- Outils & Environnement Card -->
+                <div class="glass-panel bg-white/80 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/60 hover:shadow-xl transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center mb-6">
+                        <i data-lucide="wrench" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Outils & Workflow</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 p-3 rounded-lg bg-slate-100 dark:bg-slate-900/50">
+                            <i data-lucide="terminal" class="w-5 h-5 text-purple-400"></i>
+                            <span class="text-sm font-semibold text-slate-800 dark:text-slate-200">VS Code</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-lg bg-slate-100 dark:bg-slate-900/50">
+                            <i data-lucide="git-branch" class="w-5 h-5 text-purple-400"></i>
+                            <span class="text-sm font-semibold text-slate-800 dark:text-slate-200">Git / GitHub</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 rounded-lg bg-slate-100 dark:bg-slate-900/50">
+                            <i data-lucide="file-text" class="w-5 h-5 text-purple-400"></i>
+                            <span class="text-sm font-semibold text-slate-800 dark:text-slate-200">Notion</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compétences Transversales -->
+                <div class="md:col-span-2 lg:col-span-3 glass-panel bg-white/80 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/60">
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                        <i data-lucide="users" class="w-5 h-5 text-brand-cyan"></i>
+                        <span>Compétences Transversales & Méthodologie</span>
+                    </h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+                        <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800">
+                            <i data-lucide="headphones" class="w-6 h-6 text-brand-cyan mx-auto mb-2"></i>
+                            <p class="text-sm font-semibold text-slate-800 dark:text-slate-200">Support Utilisateurs</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800">
+                            <i data-lucide="check-square" class="w-6 h-6 text-brand-cyan mx-auto mb-2"></i>
+                            <p class="text-sm font-semibold text-slate-800 dark:text-slate-200">Organisation & Rigueur</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800">
+                            <i data-lucide="book-open" class="w-6 h-6 text-brand-cyan mx-auto mb-2"></i>
+                            <p class="text-sm font-semibold text-slate-800 dark:text-slate-200">Documentation Technique</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800">
+                            <i data-lucide="kanban" class="w-6 h-6 text-brand-cyan mx-auto mb-2"></i>
+                            <p class="text-sm font-semibold text-slate-800 dark:text-slate-200">Travail en Mode Projet</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projets (Portfolio) Section -->
+    <section id="projects" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-xs sm:text-sm font-bold tracking-widest text-brand-cyan uppercase mb-2">Réalisations</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Projets à la Une</p>
+                <div class="w-16 h-1 bg-gradient-to-r from-brand-cyan to-brand-blue mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-12" id="project-filters">
+                <button data-filter="all" class="filter-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 bg-gradient-to-r from-brand-cyan to-brand-blue text-slate-950 shadow-lg shadow-brand-cyan/20">
+                    Tous
+                </button>
+                <button data-filter="dev" class="filter-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 bg-slate-200/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:text-brand-cyan">
+                    Développement
+                </button>
+                <button data-filter="data" class="filter-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 bg-slate-200/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:text-brand-cyan">
+                    Data & SQL
+                </button>
+                <button data-filter="nocode" class="filter-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 bg-slate-200/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:text-brand-cyan">
+                    No-Code
+                </button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card glass-panel bg-white/80 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700/60 overflow-hidden group hover:-translate-y-2 transition-all duration-300" data-category="dev">
+                    <div class="h-48 bg-gradient-to-tr from-slate-800 to-slate-900 p-6 flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute -right-4 -bottom-4 w-32 h-32 bg-brand-cyan/10 rounded-full blur-xl group-hover:bg-brand-cyan/20 transition-all"></div>
+                        <span class="self-start px-3 py-1 rounded-full bg-brand-cyan/20 text-brand-cyan text-xs font-semibold">Développement Web</span>
+                        <i data-lucide="shield-check" class="w-16 h-16 text-brand-cyan/30 absolute right-4 top-4"></i>
+                        <h3 class="text-2xl font-bold text-white z-10">Gestion Utilisateurs</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-slate-600 dark:text-slate-300 text-sm mb-4 line-clamp-3">
+                            Création d'une application complète avec gestion des comptes, système de rôles et permissions, structuration de la BDD et sécurisation des accès.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-900 text-xs font-medium text-slate-700 dark:text-slate-300">HTML/CSS</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-900 text-xs font-medium text-slate-700 dark:text-slate-300">PHP</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-900 text-xs font-medium text-slate-700 dark:text-slate-300">SQL</span>
+                        </div>
+                        <button onclick="openProjectModal('proj1')" class="w-full py-3 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white font-semibold text-sm hover:bg-brand-cyan hover:text-slate-950 transition-colors flex items-center justify-center gap-2">
+                            <span>Détails du projet</span>
+                            <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card glass-panel bg-white/80 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700/60 overflow-hidden group hover:-translate-y-2 transition-all duration-300" data-category="data">
+                    <div class="h-48 bg-gradient-to-tr from-slate-800 to-slate-900 p-6 flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute -right-4 -bottom-4 w-32 h-32 bg-brand-blue/10 rounded-full blur-xl group-hover:bg-brand-blue/20 transition-all"></div>
+                        <span class="self-start px-3 py-1 rounded-full bg-brand-blue/20 text-brand-blue text-xs font-semibold">Data & Métiers</span>
+                        <i data-lucide="database" class="w-16 h-16 text-brand-blue/30 absolute right-4 top-4"></i>
+                        <h3 class="text-2xl font-bold text-white z-10">Projets Métiers Grandes Entreprises</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-slate-600 dark:text-slate-300 text-sm mb-4 line-clamp-3">
+                            Analyse des besoins et modélisation de systèmes réels pour des entités majeures (Air France / RATP / Peugeot). Conception de solutions SQL.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-900 text-xs font-medium text-slate-700 dark:text-slate-300">Conception BDD</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-900 text-xs font-medium text-slate-700 dark:text-slate-300">Analyse Métier</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-900 text-xs font-medium text-slate-700 dark:text-slate-300">SQL</span>
+                        </div>
+                        <button onclick="openProjectModal('proj2')" class="w-full py-3 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white font-semibold text-sm hover:bg-brand-cyan hover:text-slate-950 transition-colors flex items-center justify-center gap-2">
+                            <span>Détails du projet</span>
+                            <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card glass-panel bg-white/80 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700/60 overflow-hidden group hover:-translate-y-2 transition-all duration-300" data-category="nocode">
+                    <div class="h-48 bg-gradient-to-tr from-slate-800 to-slate-900 p-6 flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute -right-4 -bottom-4 w-32 h-32 bg-purple-500/10 rounded-full blur-xl group-hover:bg-purple-500/20 transition-all"></div>
+                        <span class="self-start px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-semibold">Solutions No-Code</span>
+                        <i data-lucide="layers" class="w-16 h-16 text-purple-400/30 absolute right-4 top-4"></i>
+                        <h3 class="text-2xl font-bold text-white z-10">Applications No-Code</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-slate-600 dark:text-slate-300 text-sm mb-4 line-clamp-3">
+                            Conception de solutions digitales automatisées et structurées, orientées vers la rapidité de déploiement et la valeur métier.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-900 text-xs font-medium text-slate-700 dark:text-slate-300">Bubble</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-900 text-xs font-medium text-slate-700 dark:text-slate-300">Webflow</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-900 text-xs font-medium text-slate-700 dark:text-slate-300">Airtable</span>
+                        </div>
+                        <button onclick="openProjectModal('proj3')" class="w-full py-3 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white font-semibold text-sm hover:bg-brand-cyan hover:text-slate-950 transition-colors flex items-center justify-center gap-2">
+                            <span>Détails du projet</span>
+                            <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Footer Section -->
+    <section id="contact" class="py-20 relative bg-slate-100/50 dark:bg-slate-900/40 border-t border-slate-200 dark:border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs sm:text-sm font-bold tracking-widest text-brand-cyan uppercase mb-2">Échangeons</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Me Contacter</p>
+                <div class="w-16 h-1 bg-gradient-to-r from-brand-cyan to-brand-blue mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Direct Info Cards -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="glass-panel bg-white/80 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/60 flex items-start gap-4">
+                        <div class="p-3 rounded-xl bg-brand-cyan/10 text-brand-cyan shrink-0">
+                            <i data-lucide="mail" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-slate-400 uppercase tracking-wider">Email Direct</h4>
+                            <a href="mailto:josephadiceam@outlook.fr" class="text-lg font-bold text-slate-900 dark:text-white hover:text-brand-cyan transition-colors">
+                                josephadiceam@outlook.fr
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel bg-white/80 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/60 flex items-start gap-4">
+                        <div class="p-3 rounded-xl bg-brand-blue/10 text-brand-blue shrink-0">
+                            <i data-lucide="globe" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-slate-400 uppercase tracking-wider">Site Web</h4>
+                            <p class="text-lg font-bold text-slate-900 dark:text-white">portfoliojosephadiceam.com</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel bg-white/80 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/60 flex items-start gap-4">
+                        <div class="p-3 rounded-xl bg-purple-500/10 text-purple-400 shrink-0">
+                            <i data-lucide="map-pin" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-slate-400 uppercase tracking-wider">Localisation</h4>
+                            <p class="text-lg font-bold text-slate-900 dark:text-white">Pontoise, Île-de-France</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="lg:col-span-7 glass-panel bg-white/80 dark:bg-slate-800/50 p-8 rounded-2xl border border-slate-200 dark:border-slate-700/60 shadow-xl">
+                    <form id="contact-form" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Votre Nom</label>
+                                <input type="text" id="name" required placeholder="Jean Dupont" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-brand-cyan transition-colors">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Votre Email</label>
+                                <input type="email" id="email" required placeholder="jean@exemple.fr" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-brand-cyan transition-colors">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Sujet</label>
+                            <input type="text" id="subject" required placeholder="Proposition d'alternance / Collaboration" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-brand-cyan transition-colors">
+                        </div>
+
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Message</label>
+                            <textarea id="message" rows="4" required placeholder="Votre message..." class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-brand-cyan transition-colors resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-brand-cyan to-brand-blue text-slate-950 font-bold hover:shadow-lg hover:shadow-brand-cyan/20 hover:scale-[1.01] transition-all duration-200 flex items-center justify-center gap-2">
+                            <i data-lucide="send" class="w-5 h-5"></i>
+                            <span>Envoyer le message</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-slate-200 dark:border-slate-800 text-center text-sm text-slate-500 dark:text-slate-400">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© 2026 Joseph ADICEAM. Tous droits réservés.</p>
+            <p class="flex items-center gap-1">
+                Conçu avec <i data-lucide="heart" class="w-4 h-4 text-red-500 fill-red-500"></i> & Tailwind CSS
+            </p>
+        </div>
+    </footer>
+
+    <!-- Project Details Modal Container -->
+    <div id="project-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm transition-opacity duration-300 opacity-0">
+        <div class="glass-panel bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-2xl w-full p-6 sm:p-8 relative shadow-2xl scale-95 transition-transform duration-300" id="modal-content">
+            <button onclick="closeProjectModal()" class="absolute top-4 right-4 p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div id="modal-body">
+                <!-- Injected via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 glass-panel bg-slate-900 text-white border border-brand-cyan/40 px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3">
+        <i data-lucide="check-circle" class="w-6 h-6 text-brand-cyan"></i>
+        <span id="toast-message" class="text-sm font-semibold">Message envoyé avec succès !</span>
+    </div>
+
+    <script>
+        // Project Modal Details Data
+        const projectData = {
+            proj1: {
+                title: "Application de Gestion Utilisateurs",
+                category: "Développement Web & BDD",
+                description: "Projet complet axé sur la sécurité applicative et l'administration utilisateur. Réalisation d'une interface de gestion permettant la création, modification et suppression de comptes avec attribution dynamique de rôles (Administrateur, Éditeur, Utilisateur).",
+                features: [
+                    "Système d'authentification sécurisé (hachage des mots de passe)",
+                    "Gestion fine des rôles et permissions d'accès",
+                    "Base de données relationnelle optimisée en SQL",
+                    "Interface responsive et intuitive pour la gestion admin"
+                ],
+                technologies: ["HTML5", "CSS3", "PHP", "MySQL"]
+            },
+            proj2: {
+                title: "Projets Métiers (Air France / RATP / Peugeot)",
+                category: "Conception & Data",
+                description: "Modélisation de systèmes réels et analyse approfondie des besoins métiers pour de grands comptes. Conception de modèles conceptuels et logiques de données (MCD/MLD) ainsi que la rédaction de requêtes SQL complexes.",
+                features: [
+                    "Analyse des cahiers des charges et expression des besoins",
+                    "Modélisation de bases de données volumineuses",
+                    "Optimisation des requêtes de consultation et d'extraction SQL",
+                    "Rédaction de la documentation technique dédiée aux équipes dev"
+                ],
+                technologies: ["Analyse Métier", "Modélisation BDD", "SQL", "UML"]
+            },
+            proj3: {
+                title: "Applications & Solutions No-Code",
+                category: "No-Code & Automation",
+                description: "Création rapide d'applications métiers et de workflows automatisés. Intégration de bases de données relationnelles Airtable connectées à des interfaces Bubble et Webflow pour offrir des produits clés en main.",
+                features: [
+                    "Prototypage et déploiement ultra-rapide d'applications",
+                    "Automatisations inter-outils via Webhooks et APIs",
+                    "Structure de données claire et scalable sur Airtable",
+                    "Design responsive sur Webflow et Bubble"
+                ],
+                technologies: ["Bubble", "Webflow", "Airtable", "Make / Zapier"]
+            }
+        };
+
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Theme Toggle Functionality
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        
+        // Check initial theme preference
+        if (localStorage.getItem('color-theme') === 'light' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+            document.documentElement.classList.remove('dark');
+        } else {
+            document.documentElement.classList.add('dark');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIconOpen = document.getElementById('menu-icon-open');
+        const menuIconClose = document.getElementById('menu-icon-close');
+
+        mobileMenuButton.addEventListener('click', () => {
+            const isOpen = !mobileMenu.classList.contains('hidden');
+            if (isOpen) {
+                mobileMenu.classList.add('hidden');
+                menuIconOpen.classList.remove('hidden');
+                menuIconClose.classList.add('hidden');
+            } else {
+                mobileMenu.classList.remove('hidden');
+                menuIconOpen.classList.add('hidden');
+                menuIconClose.classList.remove('hidden');
+            }
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIconOpen.classList.remove('hidden');
+                menuIconClose.classList.add('hidden');
+            });
+        });
+
+        // Dynamic Typing Effect in Hero
+        const phrases = [
+            "Étudiant Bachelor No Code / Low Code",
+            "Recherche Alternance Data & IA",
+            "Concepteur de Solutions Digitales"
+        ];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingSpeed = 80;
+        const typingTextElement = document.getElementById('typing-text');
+
+        function typeEffect() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                typingTextElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingTextElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                isDeleting = true;
+                setTimeout(typeEffect, 1800);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                setTimeout(typeEffect, 400);
+            } else {
+                setTimeout(typeEffect, isDeleting ? typingSpeed / 2 : typingSpeed);
+            }
+        }
+        typeEffect();
+
+        // Project Filtering
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button styling
+                filterButtons.forEach(b => {
+                    b.className = "filter-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 bg-slate-200/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:text-brand-cyan";
+                });
+                btn.className = "filter-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 bg-gradient-to-r from-brand-cyan to-brand-blue text-slate-950 shadow-lg shadow-brand-cyan/20";
+
+                const filter = btn.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Modal Functionality
+        const modal = document.getElementById('project-modal');
+        const modalContent = document.getElementById('modal-content');
+        const modalBody = document.getElementById('modal-body');
+
+        function openProjectModal(key) {
+            const data = projectData[key];
+            if (!data) return;
+
+            modalBody.innerHTML = `
+                <span class="px-3 py-1 rounded-full bg-brand-cyan/20 text-brand-cyan text-xs font-semibold mb-3 inline-block">${data.category}</span>
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">${data.title}</h3>
+                <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6">${data.description}</p>
+                
+                <h4 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-3">Points Clés & Fonctionnalités</h4>
+                <ul class="space-y-2 mb-6">
+                    ${data.features.map(f => `
+                        <li class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300">
+                            <i data-lucide="check" class="w-4 h-4 text-brand-cyan shrink-0 mt-0.5"></i>
+                            <span>${f}</span>
+                        </li>
+                    `).join('')}
+                </ul>
+
+                <h4 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-3">Technologies</h4>
+                <div class="flex flex-wrap gap-2">
+                    ${data.technologies.map(t => `
+                        <span class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-semibold text-brand-cyan">${t}</span>
+                    `).join('')}
+                </div>
+            `;
+
+            lucide.createIcons();
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeProjectModal() {
+            modal.classList.add('opacity-0');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Close modal on click outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeProjectModal();
+        });
+
+        // Contact Form Submission & Toast
+        const contactForm = document.getElementById('contact-form');
+        const toast = document.getElementById('toast');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Show toast notification
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            contactForm.reset();
